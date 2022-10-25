@@ -1,11 +1,18 @@
-const wallet = require("../controllers/Wallet"); 
- 
-const router = require("express").Router(); 
- 
-router.get("/", wallet.getAllWallet); 
-router.post("/:id", wallet.addWallet); 
-router.get("/:id", wallet.getOneWallet); 
-router.put("/:id", wallet.updateWallet); 
-router.delete("/:id", wallet.deleteWallet); 
- 
-module.exports = router;
+import express from "express"; 
+import {
+    addWallet,
+    getAllWallet,
+    getOneWallet,
+    updateWallet,
+    deleteWallet,
+} from "../controllers/Wallet.js";
+
+const router = express.Router();
+
+router.get("/", getAllWallet);
+router.post("/", addWallet);
+router.get("/:id", getOneWallet);
+router.put("/:id", updateWallet);
+router.delete("/:id", deleteWallet);
+
+export default router;

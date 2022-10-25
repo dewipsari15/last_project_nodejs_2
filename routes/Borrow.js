@@ -1,11 +1,18 @@
-const borrow = require("../controllers/Borrow"); 
- 
-const router = require("express").Router(); 
- 
-router.get("/", borrows.getAllBorrow); 
-router.post("/:id", borrow.addBorrow); 
-router.get("/:id", borrow.getOneBorrow); 
-router.put("/:id", borrow.updateBorrow); 
-router.delete("/:id", borrow.deleteBorrow); 
- 
-module.exports = router;
+import express from "express"; 
+import {
+    addBorrows,
+    getAllBorrows,
+    getOneBorrows,
+    updateBorrows,
+    deleteBorrows,
+} from "../controllers/Borrow.js";
+
+const router = express.Router();
+
+router.get("/", getAllBorrows);
+router.post("/", addBorrows);
+router.get("/:id", getOneBorrows);
+router.put("/:id", updateBorrows);
+router.delete("/:id", deleteBorrows);
+
+export default router;

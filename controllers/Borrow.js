@@ -1,75 +1,74 @@
-import borrow from "../models/BorrowModel";
-const db = require("../models"); 
-const Borrow = db.borrow; 
- 
-// add Borrow 
-const addBorrow = async (req, res) => { 
-  const id = req.params.id; 
- 
-  let data = { 
-    id: id, 
-      userid: req.body.userid, 
-      balance: req.body.balance, 
-      date: req.body.date,  
-  }; 
- 
-  const Borrow = await Borrow.create(data); 
-  res.status(200).send(Borrow); 
-}; 
- 
-// get all Borrow 
-const getAllBorrows = async (req, res) => { 
-  const Borrows = await Borrow.findAll({ 
-    order: [["created_at", "DESC"]], 
-    include: [ 
-        { 
-            model: Borrow, 
-            as: "Borrow", 
-          }, 
-    ], 
-  }) 
-  res.status(200).send(Borrows); 
-}; 
- 
-// get by id Borrow 
-const getOneBorrow = async (req, res) => { 
-    let id = req.params.id; 
-    let Borrow = await Borrow.findByPk(id, { 
-      include: [ 
-        { 
-          model: Borrow, 
-          as: "Borrow", 
-        }, 
-      ], 
-    }); 
-    res.status(200).send(Borrow); 
-  }; 
- 
-  // update Borrow 
-  const updateBorrow = async (req, res) => { 
-    let id = req.params.id; 
-   
-    const Borrow = await Borrow.update(req.body, { where: { id: id } }); 
-    if (Borrow.affectedRows === 1) { 
-      return res.json({ success: true }); 
-    } 
-   
-    res.status(200).send(Borrow); 
-  }; 
- 
-  // delete Borrow 
-const deleteBorrow = async (req, res) => { 
-  let id = req.params.id; 
- 
-  await Borrow.destroy({ where: { id: id } }); 
- 
-  res.status(200).send("Borrow is deleted !"); 
-}; 
- 
-module.exports = { 
-    addBorrow, 
-  getAllBorrows, 
-  getOneBorrow, 
-  updateBorrow, 
-  deleteBorrow, 
+import db from "../models/BorrowModel.js";
+const Borrows = db.borrows;
+
+// add borrows
+export const addBorrows = async (req, res) => {
+  const id = req.params.id;
+
+  let data = {
+    id: id,
+    title: req.body.title,
+    descrip: req.body.descrip,
+    category: req.body.category,
+    amount: req.body.amount,
+    part: req.body.part,
+    timee: req.body.timee,
+    userUid: req.body.userUid,
+    borrowUid: req.body.borrowUid,
+    date: req.body.date,
+    logo: req.body.logo,
+    collect: req.body.collect,
+  };
+
+  const borrows = await Borrows.create(data);
+  res.status(200).send(borrows);
+};
+
+// get all borrows
+export const getAllBorrows = async (req, res) => {
+  const borrows = await Borrows.findAll({
+    order: [["created_at", "DESC"]],
+    include: [
+        {
+            model: Borrows,
+            as: "borrows",
+          },
+    ],
+  })
+  res.status(200).send(borrows);
+};
+
+// get by id borrows
+export const getOneBorrows = async (req, res) => {
+    let id = req.params.id;
+    let borrows = await Borrows.findByPk(id, {
+      include: [
+        {
+          model: Borrows,
+          as: "borrows",
+        },
+      ],
+    });
+    res.status(200).send(borrows);
+  };
+
+  // update borrows
+  export const updateBorrows = async (req, res) => {
+    let id = req.params.id;
+  
+    const borrows = await Borrows.update(req.body, { where: { id: id } });
+    if (borrows.affectedRows === 1) {
+      return res.json({ success: true });
+    }
+  
+    res.status(200).send(borrows);
+  };
+
+  // delete borrows
+  export const deleteBorrows = async (req, res) => {
+  let id = req.params.id;
+
+  await Borrows.destroy({ where: { id: id } });
+
+  res.status(200).send("Borrows is deleted !");
 };

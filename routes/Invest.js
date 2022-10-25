@@ -1,11 +1,18 @@
-const invest = require("../controllers/Invest"); 
- 
-const router = require("express").Router(); 
- 
-router.get("/", invest.getAllInvest); 
-router.post("/:id", invest.addInvest); 
-router.get("/:id", invest.getOneInvest); 
-router.put("/:id", invest.updateInvest); 
-router.delete("/:id", invest.deleteInvest); 
- 
-module.exports = router;
+import express from "express"; 
+import {
+    addInvest,
+    getAllInvest,
+    getOneInvest,
+    updateInvest,
+    deleteInvest,
+} from "../controllers/Invest.js";
+
+const router = express.Router();
+
+router.get("/", getAllInvest);
+router.post("/", addInvest);
+router.get("/:id", getOneInvest);
+router.put("/:id", updateInvest);
+router.delete("/:id", deleteInvest);
+
+export default router;

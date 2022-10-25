@@ -1,3 +1,4 @@
+//library yang digunakan
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -21,13 +22,14 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(router);
 
-const borrow = import ("./routes/Borrow.js");
-router.use("/api/borrow", borrow);
-const invest = require ("./routes/Invest.js");
+//lokasi router
+import borrow from "./routes/Borrow.js";
+app.use("/api/borrow", borrow);
+import invest from "./routes/Invest.js";
 app.use("/api/invest", invest);
-const wallet = require ("./routes/Wallet.js");
+import wallet from "./routes/Wallet.js";
 app.use("/api/wallet", wallet);
-const user = require ("./routes/Users.js");
+import user from "./routes/Users.js";
 app.use("/api/user", user);
 
 app.listen(5000, () => console.log("Server running at port 5000"));

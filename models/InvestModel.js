@@ -6,38 +6,20 @@ const { DataTypes } = Sequelize;
 const Invest = db.define(
   "Invest",
   {
-    name: {
-      type: DataTypes.TEXT,
-    },
-    email: {
-      type: DataTypes.TEXT,
-    },
-    password: {
-      type: DataTypes.TEXT,
-    },
-    contact: {
+    amount: {
       type: DataTypes.INTEGER,
     },
-    uid: {
+    borrowuid: {
+      type: DataTypes.INTEGER,
+    },
+    useruid: {
+      type: DataTypes.INTEGER,
+    },
+    investuid: {
       type: DataTypes.INTEGER,
     },
     date: {
       type: DataTypes.DATE,
-    },
-    profile_pic: {
-      type: DataTypes.TEXT,
-    },
-    aadhar: {
-      type: DataTypes.TEXT,
-    },
-    bankname: {
-      type: DataTypes.TEXT,
-    },
-    bankifsc: {
-      type: DataTypes.TEXT,
-    },
-    bank: {
-      type: DataTypes.TEXT,
     },
     refresh_token: {
       type: DataTypes.TEXT,
