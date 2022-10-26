@@ -3,7 +3,7 @@ import db from "../config/Database.js";
 
 const { DataTypes } = Sequelize;
 
-const borrow = db.define(
+const Borrow = db.define(
   "borrow",
   {
     title: {
@@ -49,4 +49,4 @@ const borrow = db.define(
   await db.sync();
 })();
 
-export default borrow;
+export default Borrow;

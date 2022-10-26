@@ -1,5 +1,4 @@
-import db from "../models/BorrowModel.js";
-const Borrows = db.borrows;
+import BorrowModel from "../models/BorrowModel.js";
 
 // add borrows
 export const addBorrows = async (req, res) => {
@@ -20,27 +19,21 @@ export const addBorrows = async (req, res) => {
     collect: req.body.collect,
   };
 
-  const borrows = await Borrows.create(data);
+  const borrows = await BorrowModel.create(data);
   res.status(200).send(borrows);
 };
 
-// get all borrows
+// get all Borrow
 export const getAllBorrows = async (req, res) => {
-  const borrows = await Borrows.findAll()
-  res.status(200).send(borrows);
+  const Borrow = await BorrowModel.findAll()
+  res.status(200).send(Borrow);
 };
+
 
 // get by id borrows
 export const getOneBorrows = async (req, res) => {
     let id = req.params.id;
-    let borrows = await Borrows.findByPk(id, {
-      include: [
-        {
-          model: Borrows,
-          as: "borrows",
-        },
-      ],
-    });
+    let borrows = await BorrowModel.findByPk(id);
     res.status(200).send(borrows);
   };
 
@@ -48,7 +41,7 @@ export const getOneBorrows = async (req, res) => {
   export const updateBorrows = async (req, res) => {
     let id = req.params.id;
   
-    const borrows = await Borrows.update(req.body, { where: { id: id } });
+    const borrows = await BorrowModel.update(req.body, { where: { id: id } });
     if (borrows.affectedRows === 1) {
       return res.json({ success: true });
     }
@@ -60,7 +53,7 @@ export const getOneBorrows = async (req, res) => {
   export const deleteBorrows = async (req, res) => {
   let id = req.params.id;
 
-  await Borrows.destroy({ where: { id: id } });
+  await BorrowModel.destroy({ where: { id: id } });
 
   res.status(200).send("Borrows is deleted !");
 };
