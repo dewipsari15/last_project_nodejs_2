@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // create data / insert data user
-app.post("/api/crowdinvest", (req, res) => {
+app.post("/api/users", (req, res) => {
   // buat variabel penampung data dan query sql
   const data = { ...req.body };
   const querySql = "INSERT INTO users SET ?";
@@ -49,16 +49,16 @@ app.post("/api/crowdinvest", (req, res) => {
     if (err) {
       return res
         .status(500)
-        .json({ message: "Gagal insert data!", error: err });
+        .json({ message: "Gagal login! mohon ulangi beberapa menit lagi..", error: err });
     }
 
     // jika request berhasil
-    res.status(201).json({ success: true, message: "Berhasil insert data!" });
+    res.status(201).json({ success: true, message: "Berhasil login" });
   });
 });
 
 // read data / get data user
-app.get("/api/crowdinvest", (req, res) => {
+app.get("/api/users", (req, res) => {
   // buat query sql
   const querySql = "SELECT * FROM users";
 
@@ -75,7 +75,7 @@ app.get("/api/crowdinvest", (req, res) => {
 });
 
 // update data user
-app.put("/api/crowdinvest/:id", (req, res) => {
+app.put("/api/users/:id", (req, res) => {
   // buat variabel penampung data dan query sql
   const data = { ...req.body };
   const querySearch = "SELECT * FROM users WHERE id = ?";
@@ -111,7 +111,7 @@ app.put("/api/crowdinvest/:id", (req, res) => {
 });
 
 // delete data user
-app.delete("/api/crowdinvest/:id", (req, res) => {
+app.delete("/api/users/:id", (req, res) => {
   // buat query sql untuk mencari data dan hapus
   const querySearch = "SELECT * FROM users WHERE id = ?";
   const queryDelete = "DELETE FROM users WHERE id = ?";

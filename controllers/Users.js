@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export const getUsers = async (req, res) => {
     try {
         const users = await Users.findAll({
-            attributes: ['id', 'name', 'email', 'contact', 'uid', 'date', 'profile_pic', 'aadhar', 'bankhome', 'bankifsc', 'bank']
+            attributes: ['id', 'name', 'email', 'password', ' contact', 'uid', 'date', 'profile_pic', 'aadhar', 'bankname', 'bankifsc', 'bank', 'refresh_token']
         });
         res.json(users);
     } catch (error) {
@@ -14,7 +14,7 @@ export const getUsers = async (req, res) => {
 }
 
 export const Register = async (req, res) => {
-    const { name, email, password, confPassword, contact, uid, Date, profile_pic, aadhar, bankname, bankifsc, bank } = req.body;
+    const { name, email, password, confPassword, contact, uid, date, profile_pic, aadhar, bankname, bankifsc, bank } = req.body;
     if (password !== confPassword) return res.status(400).json({ msg: "Password dan Confirm Password tidak cocok" });
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
@@ -25,7 +25,7 @@ export const Register = async (req, res) => {
             password: hashPassword, 
             contact: contact,
             uid: uid,
-            Date: Date,
+            date: date,
             profile_pic: profile_pic,
             aadhar: aadhar,
             bankname: bankname, 
@@ -52,16 +52,16 @@ export const Login = async (req, res) => {
         const email = user[0].email;
         const contact = user[0].contact;
         const uid = user[0].uid;
-        const Date = user[0].Date;
+        const date = user[0].date;
         const profile_pic = user[0].profile_pic;
         const aadhar = user[0].aadhar;
-        const bankhome = user[0].bankhome;
+        const bankname = user[0].bankname;
         const bankifsc = user[0].bankifsc;
         const bank = user[0].bank;
-        const accessToken = jwt.sign({ userId, name, email, contact, uid, Date, profile_pic, aadhar, bankhome, bankifsc, bank }, process.env.ACCESS_TOKEN_SECRET, {
+        const accessToken = jwt.sign({ userId, name, email, contact, uid, date, profile_pic, aadhar, bankname, bankifsc, bank }, process.env.ACCESS_TOKEN_SECRET, {
             expiresIn: '20s'
         });
-        const refreshToken = jwt.sign({ userId, name, email, contact, uid, Date, profile_pic, aadhar, bankhome, bankifsc, bank }, process.env.REFRESH_TOKEN_SECRET, {
+        const refreshToken = jwt.sign({ userId, name, email, contact, uid, date, profile_pic, aadhar, bankname, bankifsc, bank }, process.env.REFRESH_TOKEN_SECRET, {
             expiresIn: '1d'
         });
         await Users.update({ refresh_token: refreshToken }, {
