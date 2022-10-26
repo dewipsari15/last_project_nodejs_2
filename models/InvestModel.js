@@ -4,7 +4,7 @@ import db from "../config/Database.js";
 const { DataTypes } = Sequelize;
 
 const Invest = db.define(
-  "Invest",
+  "invest",
   {
     amount: {
       type: DataTypes.INTEGER,
@@ -20,9 +20,6 @@ const Invest = db.define(
     },
     date: {
       type: DataTypes.DATE,
-    },
-    refresh_token: {
-      type: DataTypes.TEXT,
     },
   },
   {

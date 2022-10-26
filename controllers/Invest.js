@@ -1,4 +1,3 @@
-import db from "../models/InvestModel.js";
 import  investModel from "../models/InvestModel.js"
 
 // add Invest
@@ -20,29 +19,14 @@ export const addInvest = async (req, res) => {
 
 // get all Invest
 export const getAllInvest = async (req, res) => {
-  const Invests = await investModel.findAll({
-    order: [["created_at", "DESC"]],
-    include: [
-        {
-            model: investModel,
-            as: "investModel",
-          },
-    ],
-  })
+  const Invests = await investModel.findAll()
   res.status(200).send(Invests);
 };
 
 // get by id Invest
 export const getOneInvest = async (req, res) => {
     let id = req.params.id;
-    let Invest = await investModel.findByPk(id, {
-      include: [
-        {
-          model: Invest,
-          as: "Invest",
-        },
-      ],
-    });
+    let Invest = await investModel.findByPk(id);
     res.status(200).send(Invest);
   };
 

@@ -12,9 +12,6 @@ const Investcrowd = db.define(
     uid: {
       type: DataTypes.TEXT, 
     },
-    refresh_token: { 
-      type: DataTypes.TEXT, 
-    }, 
   }, 
   { 
     freezeTableName: true, 

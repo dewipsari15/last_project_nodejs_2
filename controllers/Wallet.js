@@ -18,15 +18,7 @@ export const addWallet = async (req, res) => {
 
 // get all wallet
 export const getAllWallet = async (req, res) => {
-  const wallets = await Wallet.findAll({
-    order: [["created_at", "DESC"]],
-    include: [
-        {
-            model: Wallet,
-            as: "wallet",
-          },
-    ],
-  })
+  const wallets = await Wallet.findAll()
   res.status(200).send(wallets);
 };
 

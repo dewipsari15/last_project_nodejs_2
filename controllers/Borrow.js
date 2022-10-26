@@ -26,15 +26,7 @@ export const addBorrows = async (req, res) => {
 
 // get all borrows
 export const getAllBorrows = async (req, res) => {
-  const borrows = await Borrows.findAll({
-    order: [["created_at", "DESC"]],
-    include: [
-        {
-            model: Borrows,
-            as: "borrows",
-          },
-    ],
-  })
+  const borrows = await Borrows.findAll()
   res.status(200).send(borrows);
 };
 

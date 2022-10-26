@@ -39,9 +39,6 @@ const borrow = db.define(
     collect: {
       type: DataTypes.INTEGER,
     },
-    refresh_token: {
-      type: DataTypes.TEXT,
-    },
   },
   {
     freezeTableName: true,

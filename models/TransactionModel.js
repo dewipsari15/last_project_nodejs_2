@@ -21,9 +21,6 @@ const Transaction = db.define(
     balance: {
       type: DataTypes.INTEGER,
     },
-    refresh_token: {
-      type: DataTypes.TEXT,
-    },
   },
   {
     freezeTableName: true,

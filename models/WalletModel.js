@@ -15,9 +15,6 @@ const Wallet = db.define(
     date: {
       type: DataTypes.DATE,
     },
-    refresh_token: {
-      type: DataTypes.TEXT,
-    },
   },
   {
     freezeTableName: true,

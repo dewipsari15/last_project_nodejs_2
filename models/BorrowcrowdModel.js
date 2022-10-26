@@ -27,9 +27,6 @@ const borrowcrowd = db.define(
         Date: {
             type: DataTypes.DATE,
         },
-        refresh_token: {
-            type: DataTypes.TEXT,
-        },
     },
     {
         freezeTableName: true,
